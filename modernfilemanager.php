@@ -2145,8 +2145,8 @@ $all_files_size = 0;
         <div class="sidebar-section">
             <div class="sidebar-title"><i class="fa fa-eye"></i> View</div>
             <div class="sidebar-view-toggle">
-                <button class="view-btn active" id="btn-list-view" onclick="switchView('list')" title="List View" aria-label="List View"><i class="fa fa-list"></i></button>
-                <button class="view-btn" id="btn-grid-view" onclick="switchView('grid')" title="Grid View" aria-label="Grid View"><i class="fa fa-th-large"></i></button>
+                <button type="button" class="view-btn active" id="btn-list-view" onclick="switchView('list')" title="List View" aria-label="List View"><i class="fa fa-list"></i></button>
+                <button type="button" class="view-btn" id="btn-grid-view" onclick="switchView('grid')" title="Grid View" aria-label="Grid View"><i class="fa fa-th-large"></i></button>
             </div>
         </div>
     </aside>
@@ -4212,7 +4212,7 @@ function fm_show_header_login()
                 font-weight: 600;
                 color: rgba(129, 140, 248, 0.9);
                 letter-spacing: 0.5px;
-                background: linear-gradient(180deg, transparent 48%, rgba(255,255,255,0.08) 48%);
+                background: linear-gradient(180deg, transparent 45%, rgba(255,255,255,0.08) 55%);
             }
 
             .fm-login-page .md3-input {
@@ -5405,7 +5405,7 @@ function fm_show_header_login()
 
             .fm-grid-container {
                 display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
                 gap: 0.75rem;
             }
 
