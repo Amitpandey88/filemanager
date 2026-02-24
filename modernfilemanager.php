@@ -3,17 +3,17 @@
 $CONFIG = '{"lang":"en","error_reporting":false,"show_hidden":false,"hide_Cols":false,"theme":"light"}';
 
 /**
- * H3K ~ Tiny File Manager V2.6
- * @author CCP Programmers
- * @github https://github.com/prasathmani/tinyfilemanager
- * @link https://tinyfilemanager.github.io
+ * Intellimatrix.in ~ Modern File Manager V2.6
+ * @author Amitpandey88
+ * @github https://github.com/Amitpandey88/filemanager
+ * @link https://intellimatrix.in
  */
 
-//TFM version
+//MFM version
 define('VERSION', '2.6');
 
 //Application Title
-define('APP_TITLE', 'Tiny File Manager');
+define('APP_TITLE', 'Modern File Manager');
 
 // --- EDIT BELOW CONFIGURATION CAREFULLY ---
 
@@ -24,7 +24,7 @@ $use_auth = true;
 
 // Login user name and password
 // Users: array('Username' => 'Password', 'Username2' => 'Password2', ...)
-// Generate secure password hash - https://tinyfilemanager.github.io/docs/pwd.html
+// Generate secure password hash - https://github.com/Amitpandey88/filemanager
 $auth_users = array(
     'admin' => '$2y$10$ZJBMquLOYfVlC/rgPbBJGuCO1enPAMibnDnxDm7ZSmV1Ae7VN75l.', //7x9Lk2Pq5R
     'user' => '$2y$10$Fg6Dz8oH9fPoZ2jJan5tZuv6Z4Kp7avtQ9bDfrdRntXtPeiMAZyGO' //12345
@@ -143,7 +143,7 @@ $ip_blacklist = array(
 );
 
 // if User has the external config file, try to use it to override the default config above [config.php]
-// sample config - https://tinyfilemanager.github.io/config-sample.txt
+// sample config - https://github.com/Amitpandey88/filemanager
 $config_file = __DIR__ . '/config.php';
 if (is_readable($config_file)) {
     @include($config_file);
@@ -358,13 +358,15 @@ if ($use_auth) {
                                 <form class="form-signin" action="" method="post" autocomplete="off">
                                     <div class="mb-3">
                                         <div class="brand">
-                                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" M1008 width="100%" height="80px" viewBox="0 0 238.000000 140.000000" aria-label="H3K Tiny File Manager">
-                                                <g transform="translate(0.000000,140.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
-                                                    <path d="M160 700 l0 -600 110 0 110 0 0 260 0 260 70 0 70 0 0 -260 0 -260 110 0 110 0 0 600 0 600 -110 0 -110 0 0 -260 0 -260 -70 0 -70 0 0 260 0 260 -110 0 -110 0 0 -600z" />
-                                                    <path fill="#003500" d="M1008 1227 l-108 -72 0 -117 0 -118 110 0 110 0 0 110 0 110 70 0 70 0 0 -180 0 -180 -125 0 c-69 0 -125 -3 -125 -6 0 -3 23 -39 52 -80 l52 -74 73 0 73 0 0 -185 0 -185 -70 0 -70 0 0 115 0 115 -110 0 -110 0 0 -190 0 -190 181 0 181 0 109 73 108 72 1 181 0 181 -69 48 -68 49 68 50 69 49 0 249 0 248 -182 -1 -183 0 -107 -72z" />
-                                                    <path d="M1640 700 l0 -600 110 0 110 0 0 208 0 208 35 34 35 34 35 -34 35 -34 0 -208 0 -208 110 0 110 0 0 212 0 213 -87 87 -88 88 88 88 87 87 0 213 0 212 -110 0 -110 0 0 -208 0 -208 -70 -69 -70 -69 0 277 0 277 -110 0 -110 0 0 -600z" />
-                                                </g>
-                                            </svg>
+                                            <div class="brand-logo" aria-label="Modern File Manager">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="url(#brandGrad)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                                    <defs><linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#818cf8"/><stop offset="100%" style="stop-color:#c084fc"/></linearGradient></defs>
+                                                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                                                    <line x1="9" y1="13" x2="15" y2="13" opacity="0.5"/>
+                                                    <line x1="9" y1="17" x2="13" y2="17" opacity="0.5"/>
+                                                </svg>
+                                            </div>
+                                            <div class="brand-name">Intellimatrix.in</div>
                                         </div>
                                         <div class="text-center">
                                             <h1 class="card-title"><?php echo APP_TITLE; ?></h1>
@@ -399,8 +401,8 @@ if ($use_auth) {
                             </div>
                         </div>
                         <div class="footer text-center">
-                            &mdash;&mdash; &copy;
-                            <a href="https://tinyfilemanager.github.io/" target="_blank" class="text-decoration-none text-muted" data-version="<?php echo VERSION; ?>">CCP Programmers</a> &mdash;&mdash;
+                            &copy; <?php echo date('Y'); ?>
+                            <a href="https://intellimatrix.in" target="_blank" class="text-decoration-none text-muted" data-version="<?php echo VERSION; ?>">Intellimatrix.in</a>
                         </div>
                     </div>
                 </div>
@@ -1682,16 +1684,16 @@ if (isset($_GET['help'])) {
                 <div class="row">
                     <div class="col-xs-12 col-sm-6">
                         <p>
-                        <h3><a href="https://github.com/prasathmani/tinyfilemanager" target="_blank" class="app-v-title"> Tiny File Manager <?php echo VERSION; ?></a></h3>
+                        <h3><a href="https://github.com/Amitpandey88/filemanager" target="_blank" class="app-v-title"> Modern File Manager <?php echo VERSION; ?></a></h3>
                         </p>
-                        <p>Author: PRAŚATH MANİ</p>
-                        <p>Mail Us: <a href="mailto:ccpprogrammers@gmail.com">ccpprogrammers [at] gmail [dot] com</a> </p>
+                        <p>Author: Amitpandey88</p>
+                        <p>Website: <a href="https://intellimatrix.in" target="_blank">intellimatrix.in</a> </p>
                     </div>
                     <div class="col-xs-12 col-sm-6">
                         <div class="card">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a href="https://github.com/prasathmani/tinyfilemanager/wiki" target="_blank"><i class="fa fa-question-circle"></i> <?php echo lng('Help Documents') ?> </a> </li>
-                                <li class="list-group-item"><a href="https://github.com/prasathmani/tinyfilemanager/issues" target="_blank"><i class="fa fa-bug"></i> <?php echo lng('Report Issue') ?></a></li>
+                                <li class="list-group-item"><a href="https://github.com/Amitpandey88/filemanager/wiki" target="_blank"><i class="fa fa-question-circle"></i> <?php echo lng('Help Documents') ?> </a> </li>
+                                <li class="list-group-item"><a href="https://github.com/Amitpandey88/filemanager/issues" target="_blank"><i class="fa fa-bug"></i> <?php echo lng('Report Issue') ?></a></li>
                                 <?php if (!FM_READONLY) { ?>
                                     <li class="list-group-item"><a href="javascript:show_new_pwd();"><i class="fa fa-lock"></i> <?php echo lng('Generate new password hash') ?></a></li>
                                 <?php } ?>
@@ -2108,7 +2110,7 @@ if (isset($_GET['chmod']) && !FM_READONLY && !FM_IS_WIN) {
     exit;
 }
 
-// --- TINYFILEMANAGER MAIN ---
+// --- MODERN FILE MANAGER MAIN ---
 fm_show_header(); // HEADER
 fm_show_nav_path(FM_PATH); // current path
 
@@ -2349,9 +2351,9 @@ $all_files_size = 0;
                     <a href="javascript:document.getElementById('a-copy').click();" class="btn btn-small btn-outline-primary btn-2"><i class="fa fa-files-o"></i> <?php echo lng('Copy') ?> </a>
                 </div>
             </div>
-            <div class="col-3 d-none d-sm-block"><a href="https://tinyfilemanager.github.io" target="_blank" class="float-right text-muted">Tiny File Manager <?php echo VERSION; ?></a></div>
+            <div class="col-3 d-none d-sm-block"><a href="https://intellimatrix.in" target="_blank" class="float-right text-muted">Modern File Manager <?php echo VERSION; ?></a></div>
         <?php else: ?>
-            <div class="col-12"><a href="https://tinyfilemanager.github.io" target="_blank" class="float-right text-muted">Tiny File Manager <?php echo VERSION; ?></a></div>
+            <div class="col-12"><a href="https://intellimatrix.in" target="_blank" class="float-right text-muted">Modern File Manager <?php echo VERSION; ?></a></div>
         <?php endif; ?>
     </div>
 </form>
@@ -3680,7 +3682,7 @@ class FM_Config
         if (strlen($CONFIG)) {
             $data = fm_object_to_array(json_decode($CONFIG));
         } else {
-            $msg = 'Tiny File Manager<br>Error: Cannot load configuration';
+            $msg = 'Modern File Manager<br>Error: Cannot load configuration';
             if (substr($fm_url, -1) == '/') {
                 $fm_url = rtrim($fm_url, '/');
                 $msg .= '<br>';
@@ -3833,8 +3835,8 @@ function fm_show_header_login()
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="Web based File Manager in PHP, Manage your files efficiently and easily with Tiny File Manager">
-        <meta name="author" content="CCP Programmers">
+        <meta name="description" content="Web based File Manager in PHP, Manage your files efficiently and easily with Modern File Manager">
+        <meta name="author" content="Amitpandey88">
         <meta name="robots" content="noindex, nofollow">
         <meta name="googlebot" content="noindex">
         <?php if ($favicon_path) {
@@ -3889,12 +3891,25 @@ function fm_show_header_login()
             }
 
             .fm-login-page .brand {
-                width: 121px;
+                width: auto;
                 overflow: hidden;
                 margin: 0 auto;
                 position: relative;
                 z-index: 1;
-                filter: drop-shadow(0 2px 8px rgba(99,102,241,0.4));
+                text-align: center;
+            }
+
+            .fm-login-page .brand-logo {
+                margin-bottom: 12px;
+                filter: drop-shadow(0 2px 12px rgba(129,140,248,0.5));
+            }
+
+            .fm-login-page .brand-name {
+                font-size: 15px;
+                font-weight: 500;
+                color: rgba(255,255,255,0.6);
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
             }
 
             .fm-login-page .brand img {
@@ -4051,9 +4066,8 @@ function fm_show_header_login()
                 background: rgba(245,158,11,0.1);
             }
 
-            .fm-login-page svg g path:first-child,
-            .fm-login-page svg g path {
-                fill: rgba(255,255,255,0.9);
+            .fm-login-page .brand-logo svg {
+                filter: drop-shadow(0 2px 12px rgba(129,140,248,0.5));
             }
 
             body.fm-login-page.theme-dark {
@@ -4089,6 +4103,45 @@ function fm_show_header_login()
             .fm-login-page .login-pwd-toggle:hover {
                 color: #fff;
                 background: rgba(255,255,255,0.14);
+            }
+
+            /* === LOGIN RESPONSIVE === */
+            @media screen and (max-width:768px) {
+                .fm-login-page .card-wrapper {
+                    width: 92%;
+                    margin: 0 auto;
+                }
+                .fm-login-page .card-body {
+                    padding: 1.75rem !important;
+                }
+                .fm-login-page .card-title {
+                    font-size: 22px;
+                }
+                .fm-login-page .form-control {
+                    font-size: 16px;
+                    padding: 0.75rem 1rem;
+                }
+                .fm-login-page .btn-success {
+                    padding: 0.85rem 1.5rem;
+                    font-size: 16px;
+                }
+            }
+
+            @media screen and (max-width:380px) {
+                .fm-login-page .card-body {
+                    padding: 1.25rem !important;
+                }
+                .fm-login-page .brand-logo svg {
+                    width: 44px;
+                    height: 44px;
+                }
+                .fm-login-page .brand-name {
+                    font-size: 13px;
+                }
+                .fm-login-page .card-title {
+                    font-size: 20px;
+                    margin-bottom: 1rem;
+                }
             }
         </style>
     </head>
@@ -4147,14 +4200,14 @@ function fm_show_header_login()
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="Web based File Manager in PHP, Manage your files efficiently and easily with Tiny File Manager">
-        <meta name="author" content="CCP Programmers">
+        <meta name="description" content="Web based File Manager in PHP, Manage your files efficiently and easily with Modern File Manager">
+        <meta name="author" content="Amitpandey88">
         <meta name="robots" content="noindex, nofollow">
         <meta name="googlebot" content="noindex">
         <?php if ($favicon_path) {
             echo '<link rel="icon" href="' . fm_enc($favicon_path) . '" type="image/png">';
         } ?>
-        <title><?php echo fm_enc(APP_TITLE) ?> | <?php echo (isset($_GET['view']) ? $_GET['view'] : ((isset($_GET['edit'])) ? $_GET['edit'] : "H3K")); ?></title>
+        <title><?php echo fm_enc(APP_TITLE) ?> | <?php echo (isset($_GET['view']) ? $_GET['view'] : ((isset($_GET['edit'])) ? $_GET['edit'] : "Modern File Manager")); ?></title>
         <?php print_external('pre-jsdelivr'); ?>
         <?php print_external('pre-cloudflare'); ?>
         <?php print_external('css-bootstrap'); ?>
@@ -4872,6 +4925,247 @@ function fm_show_header_login()
             /* === CARD TABS (upload area) === */
             .card-tabs-container {
                 border-radius: 0 0 12px 12px;
+            }
+
+            /* === RESPONSIVE: TABLETS (max 991px) === */
+            @media screen and (max-width:991px) {
+                .main-nav {
+                    padding: 0.4rem 1rem;
+                }
+                .col-xs-6.col-sm-5 {
+                    max-width: 100%;
+                    overflow-x: auto;
+                    white-space: nowrap;
+                    -webkit-overflow-scrolling: touch;
+                    padding-bottom: 4px;
+                }
+                .col-xs-6.col-sm-7 {
+                    width: 100%;
+                    flex: 0 0 100%;
+                    max-width: 100%;
+                }
+                .edit-file-actions {
+                    text-align: start !important;
+                    margin-top: 8px;
+                }
+                .edit-file-actions .btn-group {
+                    flex-wrap: wrap;
+                    gap: 4px;
+                }
+                .filename {
+                    max-width: 260px;
+                }
+            }
+
+            /* === RESPONSIVE: MOBILE (max 767px) === */
+            @media screen and (max-width:767px) {
+                body {
+                    font-size: 13px;
+                }
+                body.navbar-fixed {
+                    margin-top: 56px;
+                }
+                .main-nav {
+                    padding: 0.35rem 0.75rem;
+                }
+                .navbar-brand {
+                    font-size: 15px;
+                }
+                .col-xs-6.col-sm-5 {
+                    font-size: 13px;
+                }
+                .col-xs-6.col-sm-5 a {
+                    font-size: 12px;
+                }
+                .bread-crumb {
+                    font-size: 12px;
+                }
+                .nav-link {
+                    font-size: 13px;
+                    padding: 0.4rem 0.5rem;
+                }
+                #search-addon {
+                    font-size: 14px;
+                }
+                .table-responsive {
+                    border-radius: 10px;
+                    -webkit-overflow-scrolling: touch;
+                }
+                #main-table thead th {
+                    font-size: 11px;
+                    padding: 0.5rem 0.6rem;
+                    letter-spacing: 0.3px;
+                }
+                .table-sm td, .table-sm th {
+                    padding: .4rem .5rem;
+                }
+                .filename {
+                    max-width: 180px;
+                    font-size: 13px;
+                }
+                #main-table .filename a {
+                    font-size: 13px;
+                }
+                .inline-actions > a > i {
+                    font-size: 0.9em;
+                    padding: 4px 6px;
+                    margin-left: 3px;
+                }
+                .btn-group.flex-wrap {
+                    gap: 4px;
+                }
+                .btn-2 {
+                    padding: 5px 8px;
+                    font-size: 11px;
+                }
+                .modal-content {
+                    margin: 0.5rem;
+                    border-radius: 12px !important;
+                }
+                .modal-header {
+                    padding: 1rem;
+                }
+                .modal-body {
+                    padding: 1rem;
+                }
+                .path .row {
+                    flex-direction: column;
+                }
+                .col-xs-12.col-sm-5.col-lg-6,
+                .edit-file-actions.col-xs-12.col-sm-7.col-lg-6 {
+                    width: 100%;
+                    max-width: 100%;
+                    flex: 0 0 100%;
+                }
+                .edit-file-actions {
+                    text-align: start !important;
+                    margin-top: 6px;
+                }
+                .edit-file-actions .btn-group {
+                    flex-wrap: wrap;
+                    gap: 3px;
+                }
+                .js-ace-toolbar {
+                    flex-wrap: wrap;
+                    gap: 2px;
+                }
+                form.dropzone {
+                    min-height: 140px;
+                    line-height: 4rem;
+                }
+                .col-md-8.offset-md-2 {
+                    padding: 0 0.5rem;
+                }
+                .break-word {
+                    margin-left: 10px;
+                }
+                .break-word + .float-right {
+                    padding-right: 10px;
+                }
+                .preview-img {
+                    border-radius: 8px;
+                }
+            }
+
+            /* === RESPONSIVE: SMALL MOBILE (max 480px) === */
+            @media screen and (max-width:480px) {
+                .main-nav {
+                    padding: 0.3rem 0.5rem;
+                }
+                .navbar-brand {
+                    font-size: 14px;
+                }
+                .filename {
+                    max-width: 140px;
+                    font-size: 12px;
+                }
+                #main-table .filename a {
+                    font-size: 12px;
+                }
+                #main-table thead th {
+                    font-size: 10px;
+                    padding: 0.4rem 0.4rem;
+                }
+                .table-sm td, .table-sm th {
+                    padding: .35rem .35rem;
+                    font-size: 12px;
+                }
+                .inline-actions > a > i {
+                    font-size: 0.85em;
+                    padding: 3px 4px;
+                    margin-left: 2px;
+                }
+                .btn-2 {
+                    padding: 4px 6px;
+                    font-size: 10px;
+                }
+                .col-xs-6.col-sm-5 a {
+                    font-size: 11px;
+                }
+                #editor {
+                    left: 5px;
+                    right: 5px;
+                    top: 160px;
+                }
+                .card-body {
+                    padding: 0.75rem;
+                }
+                #snackbar {
+                    min-width: 220px;
+                    margin-left: -110px;
+                    font-size: 13px;
+                    padding: 10px 14px;
+                }
+            }
+
+            /* === RESPONSIVE: VERY SMALL (max 360px) === */
+            @media screen and (max-width:360px) {
+                .filename {
+                    max-width: 110px;
+                }
+                .navbar-brand {
+                    font-size: 13px;
+                }
+                .btn-2 {
+                    font-size: 9px;
+                    padding: 3px 5px;
+                }
+                .nav-link {
+                    font-size: 12px;
+                }
+            }
+
+            /* === TOUCH DEVICE IMPROVEMENTS === */
+            @media (hover: none) and (pointer: coarse) {
+                .btn, .nav-link, .dropdown-item {
+                    min-height: 44px;
+                    display: inline-flex;
+                    align-items: center;
+                }
+                .btn-2 {
+                    min-height: 36px;
+                }
+                .inline-actions > a {
+                    min-width: 36px;
+                    min-height: 36px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .custom-control-input {
+                    width: 20px;
+                    height: 20px;
+                }
+                .table-hover > tbody > tr:hover > td:first-child {
+                    border-left-width: 2px;
+                }
+                .form-control {
+                    font-size: 16px;
+                    min-height: 44px;
+                }
+                #search-addon {
+                    font-size: 16px;
+                }
             }
         </style>
         <?php if (FM_THEME == "dark"): ?>
@@ -5844,7 +6138,7 @@ function fm_show_header_login()
         global $lang;
 
         // English Language
-        $tr['en']['AppName']        = 'Tiny File Manager';
+        $tr['en']['AppName']        = 'Modern File Manager';
         $tr['en']['AppTitle']       = 'File Manager';
         $tr['en']['Login']          = 'Sign in';
         $tr['en']['Username']       = 'Username';
