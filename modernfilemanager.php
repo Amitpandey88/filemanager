@@ -354,6 +354,11 @@ if ($use_auth) {
                 <div class="row justify-content-md-center align-content-center h-100vh">
                     <div class="card-wrapper">
                         <div class="card fat" data-bs-theme="<?php echo FM_THEME; ?>">
+                            <div class="macos-titlebar">
+                                <span class="macos-dot red"></span>
+                                <span class="macos-dot yellow"></span>
+                                <span class="macos-dot green"></span>
+                            </div>
                             <div class="card-body">
                                 <form class="form-signin" action="" method="post" autocomplete="off">
                                     <div class="mb-3">
@@ -3858,10 +3863,10 @@ function fm_show_header_login()
                 --gradient-end: #764ba2;
             }
 
-            * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+            * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif; }
 
             body.fm-login-page {
-                font-size: 14px;
+                font-size: clamp(13px, 1.5vw, 15px);
                 min-height: 100vh;
                 background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 70%, #533483 100%);
                 background-attachment: fixed;
@@ -3905,7 +3910,7 @@ function fm_show_header_login()
             }
 
             .fm-login-page .brand-name {
-                font-size: 15px;
+                font-size: clamp(12px, 1.3vw, 15px);
                 font-weight: 500;
                 color: rgba(255,255,255,0.6);
                 letter-spacing: 1.5px;
@@ -3917,27 +3922,46 @@ function fm_show_header_login()
             }
 
             .fm-login-page .card-wrapper {
-                width: 400px;
+                width: min(400px, 92vw);
                 position: relative;
                 z-index: 1;
             }
 
+            /* macOS-style window chrome */
             .fm-login-page .card.fat {
                 background: rgba(255, 255, 255, 0.10);
                 backdrop-filter: blur(24px) saturate(180%);
                 -webkit-backdrop-filter: blur(24px) saturate(180%);
                 border: 1px solid rgba(255, 255, 255, 0.22);
-                border-radius: 20px;
+                border-radius: 14px;
                 box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+                overflow: hidden;
             }
 
+            /* macOS traffic-light titlebar */
+            .fm-login-page .macos-titlebar {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 14px 18px 0;
+            }
+            .fm-login-page .macos-dot {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                display: inline-block;
+            }
+            .fm-login-page .macos-dot.red   { background: #ff5f57; }
+            .fm-login-page .macos-dot.yellow { background: #febc2e; }
+            .fm-login-page .macos-dot.green  { background: #28c840; }
+
             .fm-login-page .card-body {
-                padding: 2.5rem !important;
+                padding: clamp(1.25rem, 4vw, 2.5rem) !important;
             }
 
             .fm-login-page .card-title {
                 margin-bottom: 1.5rem;
-                font-size: 26px;
+                font-size: clamp(20px, 3vw, 26px);
                 font-weight: 600;
                 color: #fff;
                 letter-spacing: -0.5px;
@@ -3945,7 +3969,7 @@ function fm_show_header_login()
 
             .fm-login-page label {
                 color: rgba(255, 255, 255, 0.75);
-                font-size: 13px;
+                font-size: clamp(12px, 1.2vw, 13px);
                 font-weight: 500;
                 letter-spacing: 0.3px;
             }
@@ -3953,9 +3977,9 @@ function fm_show_header_login()
             .fm-login-page .form-control {
                 background: rgba(255, 255, 255, 0.08);
                 border: 1px solid rgba(255, 255, 255, 0.2);
-                border-radius: 10px;
+                border-radius: 8px;
                 color: #fff;
-                font-size: 14px;
+                font-size: clamp(13px, 1.4vw, 15px);
                 padding: 0.65rem 1rem;
                 transition: all 0.2s ease;
                 backdrop-filter: blur(8px);
@@ -3980,9 +4004,9 @@ function fm_show_header_login()
             .fm-login-page .btn-success {
                 background: linear-gradient(135deg, #6366f1, #764ba2);
                 border: none;
-                border-radius: 10px;
+                border-radius: 8px;
                 padding: 0.75rem 1.5rem;
-                font-size: 15px;
+                font-size: clamp(14px, 1.4vw, 15px);
                 font-weight: 600;
                 letter-spacing: 0.3px;
                 box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
@@ -4009,7 +4033,7 @@ function fm_show_header_login()
                 margin: 20px 0;
                 color: rgba(255,255,255,0.45);
                 text-align: center;
-                font-size: 13px;
+                font-size: clamp(11px, 1.2vw, 13px);
             }
 
             .fm-login-page .footer a {
@@ -4020,24 +4044,6 @@ function fm_show_header_login()
 
             .fm-login-page .footer a:hover {
                 color: rgba(255,255,255,0.85);
-            }
-
-            @media screen and (max-width:425px) {
-                .fm-login-page .card-wrapper {
-                    width: 90%;
-                    margin: 0 auto;
-                    margin-top: 10%;
-                }
-            }
-
-            @media screen and (max-width:320px) {
-                .fm-login-page .card.fat {
-                    padding: 0
-                }
-
-                .fm-login-page .card.fat .card-body {
-                    padding: 15px
-                }
             }
 
             .message {
@@ -4107,15 +4113,8 @@ function fm_show_header_login()
 
             /* === LOGIN RESPONSIVE === */
             @media screen and (max-width:768px) {
-                .fm-login-page .card-wrapper {
-                    width: 92%;
-                    margin: 0 auto;
-                }
                 .fm-login-page .card-body {
                     padding: 1.75rem !important;
-                }
-                .fm-login-page .card-title {
-                    font-size: 22px;
                 }
                 .fm-login-page .form-control {
                     font-size: 16px;
@@ -4134,13 +4133,6 @@ function fm_show_header_login()
                 .fm-login-page .brand-logo svg {
                     width: 44px;
                     height: 44px;
-                }
-                .fm-login-page .brand-name {
-                    font-size: 13px;
-                }
-                .fm-login-page .card-title {
-                    font-size: 20px;
-                    margin-bottom: 1rem;
                 }
             }
         </style>
@@ -4247,8 +4239,8 @@ function fm_show_header_login()
             }
 
             body {
-                font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-                font-size: 14px;
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+                font-size: clamp(13px, 1.4vw, 15px);
                 color: var(--text-primary);
                 background: linear-gradient(145deg, #e8ecff 0%, #f0f4ff 40%, #ede9fe 80%, #fce7f3 100%);
                 background-attachment: fixed;
@@ -4279,7 +4271,7 @@ function fm_show_header_login()
 
             .navbar-brand {
                 font-weight: 700;
-                font-size: 17px;
+                font-size: clamp(14px, 1.5vw, 17px);
                 background: linear-gradient(135deg, var(--accent), #9333ea);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
@@ -4302,7 +4294,7 @@ function fm_show_header_login()
             }
 
             .nav-link {
-                font-size: 13.5px;
+                font-size: clamp(12px, 1.3vw, 14px);
                 font-weight: 500;
                 color: var(--text-primary) !important;
                 transition: color var(--transition);
@@ -4373,7 +4365,7 @@ function fm_show_header_login()
 
             .col-xs-6.col-sm-5 a {
                 color: var(--accent);
-                font-size: 13px;
+                font-size: clamp(11px, 1.3vw, 13px);
                 font-weight: 500;
                 transition: opacity var(--transition);
             }
@@ -4382,18 +4374,38 @@ function fm_show_header_login()
                 opacity: 0.75;
             }
 
-            /* === GLASS MAIN CONTAINER === */
+            /* === GLASS MAIN CONTAINER (macOS window style) === */
             .table-responsive,
             .card-tabs-container-outer {
                 background: rgba(255,255,255,0.55);
                 backdrop-filter: blur(16px) saturate(160%);
                 -webkit-backdrop-filter: blur(16px) saturate(160%);
                 border: 1px solid rgba(255,255,255,0.65);
-                border-radius: 16px;
+                border-radius: 12px;
                 box-shadow: 0 4px 24px rgba(99,102,241,0.08), 0 1px 4px rgba(0,0,0,0.04);
                 margin: 0 0 1rem 0;
                 padding: 0;
                 overflow: hidden;
+            }
+
+            /* macOS-style titlebar for the file list */
+            .table-responsive::before {
+                content: '';
+                display: block;
+                height: 38px;
+                background: linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(245,245,250,0.5) 100%);
+                border-bottom: 1px solid rgba(99,102,241,0.08);
+                position: relative;
+                background-image:
+                    radial-gradient(circle 6px at 20px 19px, #ff5f57 6px, transparent 6px),
+                    radial-gradient(circle 6px at 40px 19px, #febc2e 6px, transparent 6px),
+                    radial-gradient(circle 6px at 60px 19px, #28c840 6px, transparent 6px);
+                background-repeat: no-repeat;
+            }
+
+            .table-responsive {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
             }
 
             .pt-3 {
@@ -4405,11 +4417,12 @@ function fm_show_header_login()
                 transition: transform .25s cubic-bezier(0.4, 0.5, 0, 1), width 0s .25s;
                 border-collapse: collapse;
                 width: 100%;
+                table-layout: fixed;
             }
 
             #main-table thead th {
                 background: rgba(99, 102, 241, 0.06);
-                font-size: 12px;
+                font-size: clamp(10px, 1.1vw, 12px);
                 font-weight: 600;
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
@@ -4421,7 +4434,7 @@ function fm_show_header_login()
             #main-table .filename a {
                 color: var(--text-primary);
                 font-weight: 500;
-                font-size: 13.5px;
+                font-size: clamp(12px, 1.3vw, 14px);
                 transition: color var(--transition);
             }
 
@@ -4527,7 +4540,7 @@ function fm_show_header_login()
             .form-control {
                 border-radius: 8px;
                 border-color: rgba(99,102,241,0.2);
-                font-size: 13.5px;
+                font-size: clamp(12px, 1.3vw, 14px);
                 color: var(--text-primary);
                 transition: all var(--transition);
             }
@@ -4723,9 +4736,10 @@ function fm_show_header_login()
 
             /* === FILE NAME === */
             .filename {
-                max-width: 420px;
+                max-width: clamp(140px, 30vw, 420px);
                 overflow: hidden;
                 text-overflow: ellipsis;
+                white-space: nowrap;
             }
 
             .filename > a > i { margin-right: 4px; }
@@ -4952,33 +4966,24 @@ function fm_show_header_login()
                     flex-wrap: wrap;
                     gap: 4px;
                 }
-                .filename {
-                    max-width: 260px;
-                }
             }
 
             /* === RESPONSIVE: MOBILE (max 767px) === */
             @media screen and (max-width:767px) {
-                body {
-                    font-size: 13px;
-                }
                 body.navbar-fixed {
                     margin-top: 56px;
                 }
                 .main-nav {
                     padding: 0.35rem 0.75rem;
                 }
-                .navbar-brand {
-                    font-size: 15px;
-                }
                 .col-xs-6.col-sm-5 {
-                    font-size: 13px;
+                    font-size: clamp(11px, 2.5vw, 13px);
                 }
                 .col-xs-6.col-sm-5 a {
-                    font-size: 12px;
+                    font-size: clamp(11px, 2.5vw, 13px);
                 }
                 .bread-crumb {
-                    font-size: 12px;
+                    font-size: clamp(10px, 2.5vw, 12px);
                 }
                 .nav-link {
                     font-size: 13px;
@@ -4991,20 +4996,11 @@ function fm_show_header_login()
                     border-radius: 10px;
                     -webkit-overflow-scrolling: touch;
                 }
-                #main-table thead th {
-                    font-size: 11px;
-                    padding: 0.5rem 0.6rem;
-                    letter-spacing: 0.3px;
-                }
                 .table-sm td, .table-sm th {
                     padding: .4rem .5rem;
                 }
-                .filename {
-                    max-width: 180px;
-                    font-size: 13px;
-                }
                 #main-table .filename a {
-                    font-size: 13px;
+                    font-size: clamp(11px, 2.8vw, 13px);
                 }
                 .inline-actions > a > i {
                     font-size: 0.9em;
@@ -5016,7 +5012,7 @@ function fm_show_header_login()
                 }
                 .btn-2 {
                     padding: 5px 8px;
-                    font-size: 11px;
+                    font-size: clamp(10px, 2.2vw, 12px);
                 }
                 .modal-content {
                     margin: 0.5rem;
@@ -5065,6 +5061,13 @@ function fm_show_header_login()
                 .preview-img {
                     border-radius: 8px;
                 }
+                .table-responsive::before {
+                    height: 30px;
+                    background-image:
+                        radial-gradient(circle 5px at 16px 15px, #ff5f57 5px, transparent 5px),
+                        radial-gradient(circle 5px at 32px 15px, #febc2e 5px, transparent 5px),
+                        radial-gradient(circle 5px at 48px 15px, #28c840 5px, transparent 5px);
+                }
             }
 
             /* === RESPONSIVE: SMALL MOBILE (max 480px) === */
@@ -5072,35 +5075,17 @@ function fm_show_header_login()
                 .main-nav {
                     padding: 0.3rem 0.5rem;
                 }
-                .navbar-brand {
-                    font-size: 14px;
-                }
-                .filename {
-                    max-width: 140px;
-                    font-size: 12px;
-                }
-                #main-table .filename a {
-                    font-size: 12px;
-                }
-                #main-table thead th {
-                    font-size: 10px;
-                    padding: 0.4rem 0.4rem;
-                }
                 .table-sm td, .table-sm th {
                     padding: .35rem .35rem;
-                    font-size: 12px;
+                    font-size: clamp(10px, 2.5vw, 12px);
                 }
                 .inline-actions > a > i {
                     font-size: 0.85em;
                     padding: 3px 4px;
                     margin-left: 2px;
                 }
-                .btn-2 {
-                    padding: 4px 6px;
-                    font-size: 10px;
-                }
                 .col-xs-6.col-sm-5 a {
-                    font-size: 11px;
+                    font-size: clamp(10px, 2.5vw, 12px);
                 }
                 #editor {
                     left: 5px;
@@ -5120,16 +5105,6 @@ function fm_show_header_login()
 
             /* === RESPONSIVE: VERY SMALL (max 360px) === */
             @media screen and (max-width:360px) {
-                .filename {
-                    max-width: 110px;
-                }
-                .navbar-brand {
-                    font-size: 13px;
-                }
-                .btn-2 {
-                    font-size: 9px;
-                    padding: 3px 5px;
-                }
                 .nav-link {
                     font-size: 12px;
                 }
@@ -5348,6 +5323,11 @@ function fm_show_header_login()
 
                 .bread-crumb {
                     color: rgba(129, 140, 248, 0.4);
+                }
+
+                .table-responsive::before {
+                    background: linear-gradient(180deg, rgba(20,20,35,0.8) 0%, rgba(15,15,25,0.6) 100%);
+                    border-bottom-color: rgba(99,102,241,0.12);
                 }
             </style>
         <?php endif; ?>
