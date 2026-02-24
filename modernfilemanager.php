@@ -9,7 +9,7 @@ $CONFIG = '{"lang":"en","error_reporting":false,"show_hidden":false,"hide_Cols":
  * @link https://intellimatrix.in
  */
 
-//TFM version
+//MFM version
 define('VERSION', '2.6');
 
 //Application Title
@@ -24,7 +24,7 @@ $use_auth = true;
 
 // Login user name and password
 // Users: array('Username' => 'Password', 'Username2' => 'Password2', ...)
-// Generate secure password hash - https://tinyfilemanager.github.io/docs/pwd.html
+// Generate secure password hash - https://github.com/Amitpandey88/filemanager
 $auth_users = array(
     'admin' => '$2y$10$ZJBMquLOYfVlC/rgPbBJGuCO1enPAMibnDnxDm7ZSmV1Ae7VN75l.', //7x9Lk2Pq5R
     'user' => '$2y$10$Fg6Dz8oH9fPoZ2jJan5tZuv6Z4Kp7avtQ9bDfrdRntXtPeiMAZyGO' //12345
@@ -143,7 +143,7 @@ $ip_blacklist = array(
 );
 
 // if User has the external config file, try to use it to override the default config above [config.php]
-// sample config - https://tinyfilemanager.github.io/config-sample.txt
+// sample config - https://github.com/Amitpandey88/filemanager
 $config_file = __DIR__ . '/config.php';
 if (is_readable($config_file)) {
     @include($config_file);
@@ -2110,7 +2110,7 @@ if (isset($_GET['chmod']) && !FM_READONLY && !FM_IS_WIN) {
     exit;
 }
 
-// --- TINYFILEMANAGER MAIN ---
+// --- MODERN FILE MANAGER MAIN ---
 fm_show_header(); // HEADER
 fm_show_nav_path(FM_PATH); // current path
 
