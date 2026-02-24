@@ -4104,6 +4104,45 @@ function fm_show_header_login()
                 color: #fff;
                 background: rgba(255,255,255,0.14);
             }
+
+            /* === LOGIN RESPONSIVE === */
+            @media screen and (max-width:768px) {
+                .fm-login-page .card-wrapper {
+                    width: 92%;
+                    margin: 0 auto;
+                }
+                .fm-login-page .card-body {
+                    padding: 1.75rem !important;
+                }
+                .fm-login-page .card-title {
+                    font-size: 22px;
+                }
+                .fm-login-page .form-control {
+                    font-size: 16px;
+                    padding: 0.75rem 1rem;
+                }
+                .fm-login-page .btn-success {
+                    padding: 0.85rem 1.5rem;
+                    font-size: 16px;
+                }
+            }
+
+            @media screen and (max-width:380px) {
+                .fm-login-page .card-body {
+                    padding: 1.25rem !important;
+                }
+                .fm-login-page .brand-logo svg {
+                    width: 44px;
+                    height: 44px;
+                }
+                .fm-login-page .brand-name {
+                    font-size: 13px;
+                }
+                .fm-login-page .card-title {
+                    font-size: 20px;
+                    margin-bottom: 1rem;
+                }
+            }
         </style>
     </head>
 
@@ -4886,6 +4925,247 @@ function fm_show_header_login()
             /* === CARD TABS (upload area) === */
             .card-tabs-container {
                 border-radius: 0 0 12px 12px;
+            }
+
+            /* === RESPONSIVE: TABLETS (max 991px) === */
+            @media screen and (max-width:991px) {
+                .main-nav {
+                    padding: 0.4rem 1rem;
+                }
+                .col-xs-6.col-sm-5 {
+                    max-width: 100%;
+                    overflow-x: auto;
+                    white-space: nowrap;
+                    -webkit-overflow-scrolling: touch;
+                    padding-bottom: 4px;
+                }
+                .col-xs-6.col-sm-7 {
+                    width: 100%;
+                    flex: 0 0 100%;
+                    max-width: 100%;
+                }
+                .edit-file-actions {
+                    text-align: start !important;
+                    margin-top: 8px;
+                }
+                .edit-file-actions .btn-group {
+                    flex-wrap: wrap;
+                    gap: 4px;
+                }
+                .filename {
+                    max-width: 260px;
+                }
+            }
+
+            /* === RESPONSIVE: MOBILE (max 767px) === */
+            @media screen and (max-width:767px) {
+                body {
+                    font-size: 13px;
+                }
+                body.navbar-fixed {
+                    margin-top: 56px;
+                }
+                .main-nav {
+                    padding: 0.35rem 0.75rem;
+                }
+                .navbar-brand {
+                    font-size: 15px;
+                }
+                .col-xs-6.col-sm-5 {
+                    font-size: 13px;
+                }
+                .col-xs-6.col-sm-5 a {
+                    font-size: 12px;
+                }
+                .bread-crumb {
+                    font-size: 12px;
+                }
+                .nav-link {
+                    font-size: 13px;
+                    padding: 0.4rem 0.5rem;
+                }
+                #search-addon {
+                    font-size: 14px;
+                }
+                .table-responsive {
+                    border-radius: 10px;
+                    -webkit-overflow-scrolling: touch;
+                }
+                #main-table thead th {
+                    font-size: 11px;
+                    padding: 0.5rem 0.6rem;
+                    letter-spacing: 0.3px;
+                }
+                .table-sm td, .table-sm th {
+                    padding: .4rem .5rem;
+                }
+                .filename {
+                    max-width: 180px;
+                    font-size: 13px;
+                }
+                #main-table .filename a {
+                    font-size: 13px;
+                }
+                .inline-actions > a > i {
+                    font-size: 0.9em;
+                    padding: 4px 6px;
+                    margin-left: 3px;
+                }
+                .btn-group.flex-wrap {
+                    gap: 4px;
+                }
+                .btn-2 {
+                    padding: 5px 8px;
+                    font-size: 11px;
+                }
+                .modal-content {
+                    margin: 0.5rem;
+                    border-radius: 12px !important;
+                }
+                .modal-header {
+                    padding: 1rem;
+                }
+                .modal-body {
+                    padding: 1rem;
+                }
+                .path .row {
+                    flex-direction: column;
+                }
+                .col-xs-12.col-sm-5.col-lg-6,
+                .edit-file-actions.col-xs-12.col-sm-7.col-lg-6 {
+                    width: 100%;
+                    max-width: 100%;
+                    flex: 0 0 100%;
+                }
+                .edit-file-actions {
+                    text-align: start !important;
+                    margin-top: 6px;
+                }
+                .edit-file-actions .btn-group {
+                    flex-wrap: wrap;
+                    gap: 3px;
+                }
+                .js-ace-toolbar {
+                    flex-wrap: wrap;
+                    gap: 2px;
+                }
+                form.dropzone {
+                    min-height: 140px;
+                    line-height: 4rem;
+                }
+                .col-md-8.offset-md-2 {
+                    padding: 0 0.5rem;
+                }
+                .break-word {
+                    margin-left: 10px;
+                }
+                .break-word + .float-right {
+                    padding-right: 10px;
+                }
+                .preview-img {
+                    border-radius: 8px;
+                }
+            }
+
+            /* === RESPONSIVE: SMALL MOBILE (max 480px) === */
+            @media screen and (max-width:480px) {
+                .main-nav {
+                    padding: 0.3rem 0.5rem;
+                }
+                .navbar-brand {
+                    font-size: 14px;
+                }
+                .filename {
+                    max-width: 140px;
+                    font-size: 12px;
+                }
+                #main-table .filename a {
+                    font-size: 12px;
+                }
+                #main-table thead th {
+                    font-size: 10px;
+                    padding: 0.4rem 0.4rem;
+                }
+                .table-sm td, .table-sm th {
+                    padding: .35rem .35rem;
+                    font-size: 12px;
+                }
+                .inline-actions > a > i {
+                    font-size: 0.85em;
+                    padding: 3px 4px;
+                    margin-left: 2px;
+                }
+                .btn-2 {
+                    padding: 4px 6px;
+                    font-size: 10px;
+                }
+                .col-xs-6.col-sm-5 a {
+                    font-size: 11px;
+                }
+                #editor {
+                    left: 5px;
+                    right: 5px;
+                    top: 160px;
+                }
+                .card-body {
+                    padding: 0.75rem;
+                }
+                #snackbar {
+                    min-width: 220px;
+                    margin-left: -110px;
+                    font-size: 13px;
+                    padding: 10px 14px;
+                }
+            }
+
+            /* === RESPONSIVE: VERY SMALL (max 360px) === */
+            @media screen and (max-width:360px) {
+                .filename {
+                    max-width: 110px;
+                }
+                .navbar-brand {
+                    font-size: 13px;
+                }
+                .btn-2 {
+                    font-size: 9px;
+                    padding: 3px 5px;
+                }
+                .nav-link {
+                    font-size: 12px;
+                }
+            }
+
+            /* === TOUCH DEVICE IMPROVEMENTS === */
+            @media (hover: none) and (pointer: coarse) {
+                .btn, .nav-link, .dropdown-item {
+                    min-height: 44px;
+                    display: inline-flex;
+                    align-items: center;
+                }
+                .btn-2 {
+                    min-height: 36px;
+                }
+                .inline-actions > a {
+                    min-width: 36px;
+                    min-height: 36px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .custom-control-input {
+                    width: 20px;
+                    height: 20px;
+                }
+                .table-hover > tbody > tr:hover > td:first-child {
+                    border-left-width: 2px;
+                }
+                .form-control {
+                    font-size: 16px;
+                    min-height: 44px;
+                }
+                #search-addon {
+                    font-size: 16px;
+                }
             }
         </style>
         <?php if (FM_THEME == "dark"): ?>
