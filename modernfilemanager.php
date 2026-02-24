@@ -378,15 +378,15 @@ if ($use_auth) {
                                         </div>
                                     </div>
                                     <hr />
-                                    <div class="mb-3">
-                                        <label for="fm_usr" class="pb-1"><?php echo lng('Username'); ?></label>
-                                        <input type="text" class="form-control" id="fm_usr" name="fm_usr" placeholder="Enter username" required autofocus>
+                                    <div class="mb-3 md3-field">
+                                        <input type="text" class="form-control md3-input" id="fm_usr" name="fm_usr" placeholder=" " required autofocus>
+                                        <label for="fm_usr" class="md3-label"><?php echo lng('Username'); ?></label>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="fm_pwd" class="pb-1"><?php echo lng('Password'); ?></label>
+                                    <div class="mb-3 md3-field">
                                         <div class="input-group">
-                                            <input type="password" class="form-control" id="fm_pwd" name="fm_pwd" placeholder="Enter password" required>
+                                            <input type="password" class="form-control md3-input" id="fm_pwd" name="fm_pwd" placeholder=" " required>
+                                            <label for="fm_pwd" class="md3-label"><?php echo lng('Password'); ?></label>
                                             <button class="login-pwd-toggle" type="button" id="toggle-pwd" onclick="fm_toggle_pwd()">
                                                 <i id="toggle-pwd-icon" class="fa fa-eye"></i>
                                             </button>
@@ -2126,11 +2126,40 @@ $num_files = count($files);
 $num_folders = count($folders);
 $all_files_size = 0;
 ?>
-<form action="" method="post" class="pt-3">
-    <input type="hidden" name="p" value="<?php echo fm_enc(FM_PATH) ?>">
-    <input type="hidden" name="group" value="1">
-    <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
-    <div class="table-responsive">
+<div class="fm-explorer-layout">
+    <!-- Glass Sidebar -->
+    <aside class="fm-glass-sidebar" id="fm-sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-title"><i class="fa fa-compass"></i> Navigator</div>
+            <a href="?p=" class="sidebar-link <?php echo (FM_PATH == '') ? 'active' : ''; ?>"><i class="fa fa-home"></i> Root</a>
+            <?php if ($parent !== false): ?>
+                <a href="?p=<?php echo urlencode($parent) ?>" class="sidebar-link"><i class="fa fa-level-up"></i> Parent Folder</a>
+            <?php endif; ?>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-title"><i class="fa fa-info-circle"></i> Info</div>
+            <div class="sidebar-stat"><span class="stat-label"><i class="fa fa-folder-o"></i> Folders</span><span class="stat-value"><?php echo $num_folders; ?></span></div>
+            <div class="sidebar-stat"><span class="stat-label"><i class="fa fa-file-o"></i> Files</span><span class="stat-value"><?php echo $num_files; ?></span></div>
+            <div class="sidebar-stat"><span class="stat-label"><i class="fa fa-database"></i> Size</span><span class="stat-value" id="sidebar-total-size">--</span></div>
+        </div>
+        <div class="sidebar-section">
+            <div class="sidebar-title"><i class="fa fa-eye"></i> View</div>
+            <div class="sidebar-view-toggle">
+                <button class="view-btn active" id="btn-list-view" onclick="switchView('list')" title="List View" aria-label="List View"><i class="fa fa-list"></i></button>
+                <button class="view-btn" id="btn-grid-view" onclick="switchView('grid')" title="Grid View" aria-label="Grid View"><i class="fa fa-th-large"></i></button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="fm-main-content">
+        <form action="" method="post" class="pt-3" id="fm-file-form">
+            <input type="hidden" name="p" value="<?php echo fm_enc(FM_PATH) ?>">
+            <input type="hidden" name="group" value="1">
+            <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
+
+            <!-- List View -->
+            <div class="table-responsive" id="fm-list-view">
         <table class="table table-bordered table-hover table-sm" id="main-table" data-bs-theme="<?php echo FM_THEME; ?>">
             <thead class="thead-white">
                 <tr>
@@ -2339,6 +2368,47 @@ $all_files_size = 0;
         </table>
     </div>
 
+    <!-- Grid View -->
+    <div class="fm-grid-view hidden" id="fm-grid-view">
+        <div class="fm-grid-container">
+            <?php
+            if ($parent !== false) {
+            ?>
+                <a href="?p=<?php echo urlencode($parent) ?>" class="fm-grid-item fm-grid-folder">
+                    <div class="grid-icon"><i class="fa fa-chevron-circle-left"></i></div>
+                    <div class="grid-name">..</div>
+                </a>
+            <?php
+            }
+            foreach ($folders as $f) {
+                $is_link = is_link($path . '/' . $f);
+            ?>
+                <a href="?p=<?php echo urlencode(trim(FM_PATH . '/' . $f, '/')) ?>" class="fm-grid-item fm-grid-folder">
+                    <div class="grid-icon"><i class="fa fa-folder"></i></div>
+                    <div class="grid-name" title="<?php echo fm_enc($f) ?>"><?php echo fm_convert_win(fm_enc($f)) ?></div>
+                    <div class="grid-meta"><?php echo lng('Folder') ?></div>
+                </a>
+            <?php
+            }
+            foreach ($files as $f) {
+                $img = fm_get_file_icon_class($path . '/' . $f);
+                $filesize_raw_grid = fm_get_size($path . '/' . $f);
+                $filesize_grid = fm_get_filesize($filesize_raw_grid);
+                $filelink = '?p=' . urlencode(FM_PATH) . '&amp;view=' . urlencode($f);
+            ?>
+                <a href="<?php echo $filelink ?>" class="fm-grid-item fm-grid-file">
+                    <div class="grid-icon"><i class="<?php echo $img ?>"></i></div>
+                    <div class="grid-name" title="<?php echo fm_enc($f) ?>"><?php echo fm_convert_win(fm_enc($f)) ?></div>
+                    <div class="grid-meta"><?php echo $filesize_grid ?></div>
+                </a>
+            <?php
+            }
+            if (empty($folders) && empty($files)) { ?>
+                <div class="fm-grid-empty"><em><?php echo lng('Folder is empty') ?></em></div>
+            <?php } ?>
+        </div>
+    </div>
+
     <div class="row">
         <?php if (!FM_READONLY): ?>
             <div class="col-xs-12 col-sm-9">
@@ -2362,6 +2432,8 @@ $all_files_size = 0;
         <?php endif; ?>
     </div>
 </form>
+    </div><!-- /.fm-main-content -->
+</div><!-- /.fm-explorer-layout -->
 
 <?php
 fm_show_footer();
@@ -4111,6 +4183,46 @@ function fm_show_header_login()
                 background: rgba(255,255,255,0.14);
             }
 
+            /* === MD3 FLOATING LABELS === */
+            .fm-login-page .md3-field {
+                position: relative;
+            }
+
+            .fm-login-page .md3-label {
+                position: absolute;
+                top: 50%;
+                left: 1rem;
+                transform: translateY(-50%);
+                color: rgba(255, 255, 255, 0.45);
+                font-size: clamp(13px, 1.4vw, 15px);
+                font-weight: 400;
+                pointer-events: none;
+                transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+                background: transparent;
+                padding: 0 4px;
+                z-index: 1;
+            }
+
+            .fm-login-page .md3-input:focus ~ .md3-label,
+            .fm-login-page .md3-input:not(:placeholder-shown) ~ .md3-label,
+            .fm-login-page .input-group .md3-input:focus ~ .md3-label,
+            .fm-login-page .input-group .md3-input:not(:placeholder-shown) ~ .md3-label {
+                top: 0;
+                font-size: clamp(10px, 1vw, 11px);
+                font-weight: 600;
+                color: rgba(129, 140, 248, 0.9);
+                letter-spacing: 0.5px;
+                background: linear-gradient(180deg, transparent 48%, rgba(255,255,255,0.08) 48%);
+            }
+
+            .fm-login-page .md3-input {
+                height: 52px;
+            }
+
+            .fm-login-page .input-group .md3-label {
+                z-index: 5;
+            }
+
             /* === LOGIN RESPONSIVE === */
             @media screen and (max-width:768px) {
                 .fm-login-page .card-body {
@@ -5142,6 +5254,252 @@ function fm_show_header_login()
                     font-size: 16px;
                 }
             }
+            /* === GLASS SIDEBAR === */
+            .fm-explorer-layout {
+                display: flex;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .fm-glass-sidebar {
+                width: 220px;
+                min-width: 220px;
+                background: rgba(255, 255, 255, 0.45);
+                backdrop-filter: blur(20px) saturate(180%);
+                -webkit-backdrop-filter: blur(20px) saturate(180%);
+                border: 1px solid rgba(255, 255, 255, 0.6);
+                border-radius: 14px;
+                box-shadow: 0 4px 24px rgba(99,102,241,0.08), 0 1px 4px rgba(0,0,0,0.04);
+                padding: 1rem;
+                position: sticky;
+                top: 76px;
+            }
+
+            .sidebar-section {
+                margin-bottom: 1.25rem;
+            }
+
+            .sidebar-section:last-child {
+                margin-bottom: 0;
+            }
+
+            .sidebar-title {
+                font-size: 11px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.8px;
+                color: var(--text-secondary);
+                margin-bottom: 0.5rem;
+                padding: 0 0.25rem;
+            }
+
+            .sidebar-title i {
+                margin-right: 4px;
+                color: var(--accent);
+            }
+
+            .sidebar-link {
+                display: block;
+                padding: 0.4rem 0.6rem;
+                border-radius: 8px;
+                font-size: 13px;
+                font-weight: 500;
+                color: var(--text-primary);
+                transition: all 0.15s ease;
+                margin-bottom: 2px;
+            }
+
+            .sidebar-link:hover {
+                background: rgba(99, 102, 241, 0.1);
+                color: var(--accent);
+            }
+
+            .sidebar-link.active {
+                background: rgba(99, 102, 241, 0.12);
+                color: var(--accent);
+                font-weight: 600;
+            }
+
+            .sidebar-link i {
+                width: 18px;
+                text-align: center;
+                margin-right: 6px;
+            }
+
+            .sidebar-stat {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.3rem 0.5rem;
+                font-size: 12px;
+            }
+
+            .stat-label {
+                color: var(--text-secondary);
+                font-weight: 500;
+            }
+
+            .stat-label i {
+                width: 16px;
+                text-align: center;
+                margin-right: 4px;
+                color: var(--accent);
+            }
+
+            .stat-value {
+                font-weight: 600;
+                color: var(--text-primary);
+                font-size: 12px;
+            }
+
+            .sidebar-view-toggle {
+                display: flex;
+                gap: 4px;
+                padding: 0 0.25rem;
+            }
+
+            .view-btn {
+                flex: 1;
+                padding: 0.45rem;
+                border: 1px solid rgba(99, 102, 241, 0.2);
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.5);
+                color: var(--text-secondary);
+                cursor: pointer;
+                font-size: 14px;
+                text-align: center;
+                transition: all 0.15s ease;
+            }
+
+            .view-btn:hover {
+                background: rgba(99, 102, 241, 0.08);
+                color: var(--accent);
+            }
+
+            .view-btn.active {
+                background: linear-gradient(135deg, #6366f1, #7c3aed);
+                color: #fff;
+                border-color: transparent;
+                box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
+            }
+
+            .fm-main-content {
+                flex: 1;
+                min-width: 0;
+            }
+
+            /* === GRID VIEW === */
+            .fm-grid-view {
+                background:
+                    radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                    radial-gradient(ellipse at 80% 20%, rgba(147, 51, 234, 0.06) 0%, transparent 50%),
+                    radial-gradient(ellipse at 50% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
+                    rgba(255, 255, 255, 0.4);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.6);
+                border-radius: 14px;
+                padding: 1.25rem;
+                box-shadow: 0 4px 24px rgba(99, 102, 241, 0.08);
+            }
+
+            .fm-grid-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 0.75rem;
+            }
+
+            .fm-grid-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem 0.5rem 0.75rem;
+                border-radius: 12px;
+                background: rgba(255, 255, 255, 0.55);
+                border: 1px solid rgba(255, 255, 255, 0.7);
+                transition: all 0.2s ease;
+                text-decoration: none !important;
+                cursor: pointer;
+            }
+
+            .fm-grid-item:hover {
+                background: rgba(255, 255, 255, 0.8);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(99, 102, 241, 0.15);
+                border-color: rgba(99, 102, 241, 0.25);
+            }
+
+            .grid-icon {
+                font-size: 2.25rem;
+                margin-bottom: 0.5rem;
+                line-height: 1;
+            }
+
+            .fm-grid-folder .grid-icon i {
+                color: #6366f1;
+            }
+
+            .fm-grid-file .grid-icon i.fa-file-text-o { color: #3b82f6; }
+            .fm-grid-file .grid-icon i.fa-picture-o { color: #10b981; }
+            .fm-grid-file .grid-icon i.fa-file-archive-o { color: #f87171; }
+            .fm-grid-file .grid-icon i.fa-file-code-o { color: #6366f1; }
+            .fm-grid-file .grid-icon i.fa-css3 { color: #f472b6; }
+            .fm-grid-file .grid-icon i.fa-html5 { color: #ef4444; }
+            .fm-grid-file .grid-icon i.fa-file-excel-o { color: #10b981; }
+            .fm-grid-file .grid-icon i.fa-code { color: #ef4444; }
+            .fm-grid-file .grid-icon i.fa-file-powerpoint-o { color: #f97316; }
+            .fm-grid-file .grid-icon i { color: #6366f1; }
+
+            .grid-name {
+                font-size: 12px;
+                font-weight: 500;
+                color: var(--text-primary);
+                text-align: center;
+                max-width: 110px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .grid-meta {
+                font-size: 10px;
+                color: var(--text-secondary);
+                margin-top: 2px;
+            }
+
+            .fm-grid-empty {
+                grid-column: 1 / -1;
+                text-align: center;
+                padding: 2rem;
+                color: var(--text-secondary);
+            }
+
+            /* === SIDEBAR RESPONSIVE === */
+            @media screen and (max-width:991px) {
+                .fm-glass-sidebar {
+                    display: none;
+                }
+                .fm-explorer-layout {
+                    display: block;
+                }
+            }
+
+            @media screen and (max-width:767px) {
+                .fm-grid-container {
+                    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                    gap: 0.5rem;
+                }
+                .fm-grid-item {
+                    padding: 0.75rem 0.35rem 0.5rem;
+                }
+                .grid-icon {
+                    font-size: 1.75rem;
+                }
+                .grid-name {
+                    font-size: 11px;
+                    max-width: 80px;
+                }
+            }
         </style>
         <?php if (FM_THEME == "dark"): ?>
             <style>
@@ -5328,6 +5686,58 @@ function fm_show_header_login()
                 .table-responsive::before {
                     background: linear-gradient(180deg, rgba(20,20,35,0.8) 0%, rgba(15,15,25,0.6) 100%);
                     border-bottom-color: rgba(99,102,241,0.12);
+                }
+
+                /* Dark theme sidebar */
+                .fm-glass-sidebar {
+                    background: rgba(15, 15, 30, 0.6);
+                    border-color: rgba(99, 102, 241, 0.15);
+                    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+                }
+
+                .sidebar-link {
+                    color: var(--text-primary);
+                }
+
+                .sidebar-link:hover {
+                    background: rgba(99, 102, 241, 0.15);
+                }
+
+                .sidebar-link.active {
+                    background: rgba(99, 102, 241, 0.18);
+                }
+
+                .view-btn {
+                    background: rgba(255, 255, 255, 0.05);
+                    border-color: rgba(99, 102, 241, 0.2);
+                    color: var(--text-secondary);
+                }
+
+                .view-btn:hover {
+                    background: rgba(99, 102, 241, 0.12);
+                }
+
+                /* Dark theme grid view */
+                .fm-grid-view {
+                    background:
+                        radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 20%, rgba(147, 51, 234, 0.08) 0%, transparent 50%),
+                        rgba(15, 15, 30, 0.5);
+                    border-color: rgba(99, 102, 241, 0.15);
+                }
+
+                .fm-grid-item {
+                    background: rgba(20, 20, 40, 0.6);
+                    border-color: rgba(99, 102, 241, 0.12);
+                }
+
+                .fm-grid-item:hover {
+                    background: rgba(30, 30, 55, 0.7);
+                    border-color: rgba(99, 102, 241, 0.3);
+                }
+
+                .grid-name {
+                    color: var(--text-primary);
                 }
             </style>
         <?php endif; ?>
@@ -5749,6 +6159,28 @@ function fm_show_header_login()
                 }, s.previewImage()
             }(jQuery);
 
+            // Toggle between list and grid view
+            function switchView(mode) {
+                var listView = document.getElementById('fm-list-view');
+                var gridView = document.getElementById('fm-grid-view');
+                var btnList = document.getElementById('btn-list-view');
+                var btnGrid = document.getElementById('btn-grid-view');
+                if (!listView || !gridView) return;
+                if (mode === 'grid') {
+                    listView.classList.add('hidden');
+                    gridView.classList.remove('hidden');
+                    if (btnList) btnList.classList.remove('active');
+                    if (btnGrid) btnGrid.classList.add('active');
+                    localStorage.setItem('fm_view_mode', 'grid');
+                } else {
+                    gridView.classList.add('hidden');
+                    listView.classList.remove('hidden');
+                    if (btnGrid) btnGrid.classList.remove('active');
+                    if (btnList) btnList.classList.add('active');
+                    localStorage.setItem('fm_view_mode', 'list');
+                }
+            }
+
             // Dom Ready Events
             $(document).ready(function() {
                 // dataTable init
@@ -5789,6 +6221,21 @@ function fm_show_header_login()
                     $(".fm-upload-wrapper .card-tabs-container").addClass('hidden');
                     $(target).removeClass('hidden');
                 });
+
+                // Sidebar total size
+                var $sizeEl = $('#sidebar-total-size');
+                if ($sizeEl.length) {
+                    var footerSizeBadge = $('.table-responsive tfoot .badge');
+                    if (footerSizeBadge.length > 0) {
+                        $sizeEl.text(footerSizeBadge.first().text());
+                    }
+                }
+
+                // Restore view preference
+                var savedView = localStorage.getItem('fm_view_mode');
+                if (savedView === 'grid') {
+                    switchView('grid');
+                }
             });
         </script>
 
