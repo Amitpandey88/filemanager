@@ -354,7 +354,7 @@ if ($use_auth) {
                 <div class="row justify-content-md-center align-content-center h-100vh">
                     <div class="card-wrapper">
                         <div class="card fat" data-bs-theme="<?php echo FM_THEME; ?>">
-                            <div class="macos-titlebar">
+                            <div class="macos-titlebar" aria-hidden="true">
                                 <span class="macos-dot red"></span>
                                 <span class="macos-dot yellow"></span>
                                 <span class="macos-dot green"></span>
